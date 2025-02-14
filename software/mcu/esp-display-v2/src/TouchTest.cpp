@@ -5,7 +5,7 @@
 // Modified by 2024-01-18  Marcel Verpaalen to use HW spi on the ESP32-2432S028R board
 // As display and touch are using different SPI configurations.
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 #include "Adafruit_ILI9341.h"
 #include <XPT2046_Touchscreen.h>
