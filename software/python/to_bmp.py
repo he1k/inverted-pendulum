@@ -1,8 +1,8 @@
 from PIL import Image
 import os
 
-SRC_FOLDER = "../img"
-DEST_FOLDER = "../img_bmp" 
+SRC_FOLDER = "img"
+DEST_FOLDER = "img_bmp" 
 LANDSCAPE_MODE = False
 
 PORTRAIT_RESOLUTION  = (240, 320)
