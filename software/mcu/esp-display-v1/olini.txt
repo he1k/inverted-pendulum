@@ -48,3 +48,30 @@ build_flags =
 
 build_src_flags = -Wunused-variable -Wuninitialized
 lib_deps = adafruit/SdFat - Adafruit Fork@^2.2.3
+
+
+
+    -D DISPLAY_WIDTH=320
+    -D DISPLAY_HEIGHT=240
+    -D USER_SETUP_LOADED=1
+    -D TFT_RGB_ORDER=TFT_RGB
+    -D ILI9341_DRIVER=1
+    -D TFT_MISO=19
+    -D TFT_MOSI=13
+    -D TFT_SCLK=14
+    -D TFT_CS=15
+    -D TFT_DC=2
+    -D TFT_RST=12
+    -D TFT_BCKL=21
+    -D SPI_FREQUENCY=40000000
+    -D SPI_READ_FREQUENCY=16000000
+    -D SMOOTH_FONT=1
+    -D TOUCH_MOSI=32
+    -D TOUCH_MISO=39
+    -D TOUCH_CLK=25
+    -D TOUCH_CS=33
+    -D TF_CS=5
+    -D ENABLE_FAT12_SUPPORT=1
+    -D LV_CONF_PATH="${PROJECT_DIR}/lv_conf.h"
+    -D CORE_DEBUG_LEVEL=5
+    -D ENABLE_SERIAL=1
