@@ -1,0 +1,5 @@
+../Core/Src/stm32l4xx_hal_current_sense.c:15:13:HAL_CURRENT_process_block.constprop	5
+../Core/Src/stm32l4xx_hal_current_sense.c:44:6:HAL_CURRENT_init	1
+../Core/Src/stm32l4xx_hal_current_sense.c:59:19:HAL_CURRENT_start	2
+../Core/Src/stm32l4xx_hal_current_sense.c:70:6:HAL_CURRENT_OnHalfTransferISR	2
+../Core/Src/stm32l4xx_hal_current_sense.c:76:6:HAL_CURRENT_OnFullTransferISR	2

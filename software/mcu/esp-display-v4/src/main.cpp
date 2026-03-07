@@ -79,7 +79,7 @@ void setup()
   // {
   //   Serial.print("SUCCEEDED to open: "); Serial.println(lenna_landscape);
   // }
-  bmpDraw("/img_test/parrot.bmp", 0, 0);
+  bmpDraw("/img_test/lenna.bmp", 0, 0);
   // if (!bmpDraw(lenna_landscape, 0, 0)) {
   //   Serial.println("Failed to draw image.");
   // }

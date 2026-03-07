@@ -1,0 +1,7 @@
+../HAL_MotorDriver/stm32l4xx_hal_motor_driver.c:7:9:HAL_MOTOR_fault	1
+../HAL_MotorDriver/stm32l4xx_hal_motor_driver.c:19:6:HAL_MOTOR_write_in1	2
+../HAL_MotorDriver/stm32l4xx_hal_motor_driver.c:29:6:HAL_MOTOR_write_in2	2
+../HAL_MotorDriver/stm32l4xx_hal_motor_driver.c:39:6:HAL_MOTOR_init	6
+../HAL_MotorDriver/stm32l4xx_hal_motor_driver.c:75:6:HAL_MOTOR_write	6
+../HAL_MotorDriver/stm32l4xx_hal_motor_driver.c:126:6:HAL_MOTOR_enable	1
+../HAL_MotorDriver/stm32l4xx_hal_motor_driver.c:132:6:HAL_MOTOR_disable	1

@@ -1,0 +1,5 @@
+../Core/Src/main.c:285:6:SystemClock_Config	104	static,ignoring_inline_asm
+../Core/Src/main.c:91:5:main	168	static,ignoring_inline_asm
+../Core/Src/main.c:687:6:HAL_ADC_ConvHalfCpltCallback	0	static
+../Core/Src/main.c:696:6:HAL_ADC_ConvCpltCallback	0	static
+../Core/Src/main.c:715:6:Error_Handler	0	static,ignoring_inline_asm
