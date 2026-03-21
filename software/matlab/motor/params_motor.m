@@ -1,0 +1,7 @@
+R = 2.59;     % Resistance (ohm)
+L = 708e-6;   % Inductance (H)
+J = 115*1e-7; % Rotor inertia (kg m^3) 
+Kt = 79.7e-3; % Torque constant (Nm)
+Ke = Kt;      % EMF constant V/(rad/s)
+B = 0;        % Viscous friction (Nm/(rad/s))
+Mr = 6.5e-3;  % Friction torque (Nm)

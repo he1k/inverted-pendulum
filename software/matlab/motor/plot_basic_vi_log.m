@@ -29,8 +29,8 @@ L = 708e-6;   % Inductance (H)
 J = 115*1e-7; % Rotor inertia (kg m^3) 
 Kt = 79.7e-3; % Torque constant (Nm)
 Ke = Kt;      % EMF constant V/(rad/s)
-b = 0;        % Viscous friction (Nm/(rad/s))
-
+B = 0;        % Viscous friction (Nm/(rad/s))
+Mr = 6.5e-3;
 % Create transfer function for u/i where u is motor voltage and i is
 % current - For theoretical system
 s = tf('s');
@@ -70,6 +70,12 @@ y = lsim(G, -volt, time); % Simulate the response of the system
 %     y(k) = i;
 % end
 
+
+mdl = 'motor_model.slx'
+u_sim = [time,-volt];
+
+out = sim(mdl, 'StopTime', string(time(end)));
+y_sim = out.get('i_sim');
 % Plot
 figure;
 yyaxis left
@@ -77,11 +83,12 @@ plot(time, volt, '-g', 'LineWidth', 1.5);
 ylabel('Motor voltage $[V]$');
 
 yyaxis right
-plot(time, current, '-r', 'LineWidth', 1.5); hold on;
-plot(time, y, '--b', 'LineWidth', 1.5); hold off;
+stairs(time, current, '-r', 'LineWidth', 1.5); hold on;
+plot(time, y_sim, '--b', 'LineWidth', 1.5);
+plot(time, y, '--m', 'LineWidth', 1.5); hold off;
 ylabel('Motor current $[A]$');
 
 xlabel('Time $[s]$');
 title('Voltage and Current vs Time');
-legend('$u$','$i_{meas}$ ', '$i_{sim}$');
+legend('$u$','$i_{meas}$ ', '$i_{sim,sim}$','$i_{sim,mat}$');
 grid on;
