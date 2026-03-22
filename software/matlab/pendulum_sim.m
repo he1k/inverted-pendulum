@@ -1,6 +1,7 @@
 %% Setup and parameters
 SIM_IDEAL_MEASUREMENT = 1;
 SIM_OPEN_LOOP = 1;
+SIM_REDUCED_STATES = 1;
 STEP_SIZE = 1e-3;
 SIM_TIME = 10;
 SIM_FILE = "pendulum_model";
@@ -14,6 +15,7 @@ phi0 = 0;
 phi_dot0 = 0;
 i0 = 0;
 X0 = [theta_dot0;theta0;x_dot0;x0;phi_dot0;phi0;i0];
+xss = X0;
 K_lqr = zeros(1,7);
 %% System equations
 syms theta dtheta ddtheta x dx ddx F u i di;
@@ -44,7 +46,7 @@ Asym = jacobian(f, X);
 Bsym = jacobian(f, U);
 
 eq_point = [dtheta, theta, dx, x, i, u];
-eq_values = [0, pi, 0, 0, 0, 0];
+eq_values = [X0(1:5)',0];
 
 A = double(subs(Asym, eq_point, eq_values));
 B = double(subs(Bsym, eq_point, eq_values));
@@ -69,7 +71,7 @@ disp(B);
 ss_d = c2d(ss_ol, STEP_CTRL);
 F = ss_d.A;
 G = ss_d.B;
-Q = diag([10, 10000, 0.5,0.1,0])
+Q = diag([10, 20000, 0.5,50,0])
 R = 1;
 %Q = diag([10, 1000, 0, 0, 0]); 
 R = 0.01; % Make "voltage" cheap so the motor pushes hard
@@ -79,12 +81,15 @@ R = 0.01; % Make "voltage" cheap so the motor pushes hard
 % Simulate using discrete model
 theta0 = pi - deg2rad(3);
 SIM_OPEN_LOOP = 0;
-sim("pendulum_simple_model");
+SIM_REDUCED_STATES = 1;
+SIM_TIME = 10;
+xss = X0(1:5);
+sim("pendulum_model");
 %%
 theta_dot = rad2deg(logsout.getElement('theta_dot').Values.Data);
 theta = rad2deg(logsout.getElement('theta').Values.Data);
 % Wrap theta between 180 and -180
-theta = mod(theta + 180, 360) - 180;
+%theta = mod(theta + 180, 360) - 180;
 x = logsout.getElement('x').Values.Data;
 x_dot = logsout.getElement('x_dot').Values.Data;
 phi = rad2deg(logsout.getElement('phi').Values.Data);
@@ -93,7 +98,7 @@ i = logsout.getElement('i').Values.Data;
 f_belt = logsout.getElement('f_belt').Values.Data;
 u = logsout.getElement('u_sat').Values.Data;
 t = 0:STEP_SIZE:SIM_TIME;
-figure(1);
+figure;
 ax(1) = subplot(4,1,1);
 plot(t,theta, 'r');
 xlabel('$t$');
@@ -130,14 +135,14 @@ linkaxes(ax,'x');
 %%
 
 % find index for where t >= 3
-filename = 'data.csv';
-ix = find(t >= 3, 1);
-
-% Build table and write
-T = table(t(1:ix), theta(1:ix)', theta_dot(1:ix)', ...
-          x(1:ix)', x_dot(1:ix)', phi(1:ix)', phi_dot(1:ix)', i(1:ix)', u(1:ix)',f_belt(1:ix)', ...
-          'VariableNames', {'Time', 'theta', 'theta_dot', 'x', 'x_dot', 'phi', 'phi_dot', 'i', 'u', 'f_belt'});
-writetable(T, filename);
+% filename = 'data.csv';
+% ix = find(t >= 3, 1);
+% 
+% % Build table and write
+% T = table(t(1:ix), theta(1:ix)', theta_dot(1:ix)', ...
+%           x(1:ix)', x_dot(1:ix)', phi(1:ix)', phi_dot(1:ix)', i(1:ix)', u(1:ix)',f_belt(1:ix)', ...
+%           'VariableNames', {'Time', 'theta', 'theta_dot', 'x', 'x_dot', 'phi', 'phi_dot', 'i', 'u', 'f_belt'});
+% writetable(T, filename);
 %%
 % figure(1);
 % ax(1) = subplot(6,1,1);
